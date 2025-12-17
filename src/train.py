@@ -148,8 +148,4 @@ if __name__ == "__main__":
     parser.add_argument("--threshold", type=float, default=0.4)
     args = parser.parse_args()
 
-    print(os.environ.get("MLFLOW_TRACKING_URI"))
-    print(os.environ.get("DAGSHUB_API_KEY"))
-    print(os.environ.get("DAGSHUB_USERNAME"))
-
     train_model(args.n_estimators, args.threshold)
