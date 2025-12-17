@@ -1,0 +1,37 @@
+schema: '2.0'
+stages:
+  prepare:
+    cmd: echo "Verificando que los datos existen..."
+    deps:
+    - path: data/german_credit.csv
+      hash: md5
+      md5: d5f1ce625da90a379623cdea6e1914f3
+      size: 80049
+  train:
+    cmd: python src/train.py --n_estimators 300 --threshold 0.4
+    deps:
+    - path: data/german_credit.csv
+      hash: md5
+      md5: d5f1ce625da90a379623cdea6e1914f3
+      size: 80049
+    - path: requirements.txt
+      hash: md5
+      md5: 4374c2fc5f7bb223fa81707e19ac9581
+      size: 179
+    - path: src/train.py
+      hash: md5
+      md5: 874ec82e7ab95e57ddf80bf350eb1445
+      size: 4235
+    params:
+      params.yaml:
+        train.n_estimators: 300
+        train.threshold: 0.4
+    outs:
+    - path: mlflow_metrics.json
+      hash: md5
+      md5: 2b30cddbe43f30da4d42819ac9c49980
+      size: 176
+    - path: models/model.pkl
+      hash: md5
+      md5: a7bff4c0fc57abf657be2a6eff39b939
+      size: 319108

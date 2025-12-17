@@ -4,7 +4,7 @@ stages:
     deps:
       - data/german_credit.csv
   train:
-    cmd: python train.py --n_estimators ${train.n_estimators} --threshold ${train.threshold}
+    cmd: python src/train.py --n_estimators ${train.n_estimators} --threshold ${train.threshold}
     deps:
       - src/train.py
       - requirements.txt

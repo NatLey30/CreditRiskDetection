@@ -145,7 +145,7 @@ def train_model(n_estimators, threshold):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--n_estimators", type=int, default=300)
-    parser.add_argument("--threshold", type=int, default=0.4)
+    parser.add_argument("--threshold", type=float, default=0.4)
     args = parser.parse_args()
 
     train_model(args.n_estimators, args.threshold)
