@@ -1,6 +1,7 @@
 import os
 import argparse
 import pandas as pd
+import json
 import joblib
 import mlflow
 import mlflow.sklearn
@@ -116,6 +117,7 @@ def train_model(n_estimators, threshold):
         mlflow.log_metric("mae", mae)
         mlflow.log_metric("rmse", rmse)
         mlflow.log_metric("f1", f1)
+
         mlflow.sklearn.log_model(pipeline, "credit-risk-model")
 
         print(f"Accuracy: {accuracy:.4f}")
@@ -125,6 +127,19 @@ def train_model(n_estimators, threshold):
         print(f"RMSE: {rmse:.4f}")
         print(f"F1 Score: {f1:.4f}")
         print("Model saved as model.pkl")
+
+        with open("mlflow_metrics.json", "w") as f:
+            json.dump(
+                {
+                    "accuracy": accuracy,
+                    "recall": recall,
+                    "roc_auc": roc_auc,
+                    "mae": mae,
+                    "rmse": rmse,
+                    "f1": f1
+                    },
+                f
+            )
 
 
 if __name__ == "__main__":

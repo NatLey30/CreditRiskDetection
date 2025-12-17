@@ -3,7 +3,7 @@ import pandas as pd
 from flask import Flask, request, jsonify
 
 
-MODEL_PATH = "model.pkl"
+MODEL_PATH = "models/model.pkl"
 
 app = Flask(__name__)
 
@@ -25,6 +25,7 @@ def predict():
     try:
         data = request.get_json()
         df = pd.DataFrame([data])
+        df["credit_per_month"] = df["credit_amount"] / df["duration"]
 
         prediction = model.predict(df)[0]
         probability = model.predict_proba(df)[0, 1]
