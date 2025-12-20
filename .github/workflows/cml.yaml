@@ -87,7 +87,7 @@ jobs:
       # # 1. Construir la imagen de la API usando Dockerfile
       # # 2. Subir la imagen de la API a GCR
       #   run: |
-      #     docker build -t gcr.io/${{ vars.GCP_PROJECT_ID }}/mlops-api:latest .
+      #     docker build -t gcr.io/${{ vars.GCP_PROJECT_ID }}/mlops-api:latest -f Dockerfile.api .
       #     docker push gcr.io/${{ vars.GCP_PROJECT_ID }}/mlops-api:latest
       #   # --- CONSTRUIR Y SUBIR IMAGEN DE LA WEB (mlops-web) ---
       # - name: Build and Push Web Docker Image
@@ -100,7 +100,7 @@ jobs:
         id: build_api
         run: |
           IMAGE_NAME="gcr.io/${{ vars.GCP_PROJECT_ID }}/mlops-api:latest"
-          docker build -t $IMAGE_NAME .
+          docker build -t $IMAGE_NAME -f Dockerfile.api .
           echo "IMAGE_API=$IMAGE_NAME" >> $GITHUB_ENV
 
       - name: Trivy Scan for API Image
