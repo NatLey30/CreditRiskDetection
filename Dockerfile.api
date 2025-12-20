@@ -6,9 +6,11 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copiar código y modelo
-COPY web/api.py .
-COPY models/model.pkl .
+# Copiamos la API
+COPY web/api.py ./api.py
+
+# Copiamos el modelo (ruta relativa)
+COPY models/model.pkl ./models/model.pkl
 
 EXPOSE 5000
 
