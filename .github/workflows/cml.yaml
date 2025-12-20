@@ -87,19 +87,19 @@ jobs:
       # # 1. Construir la imagen de la API usando Dockerfile
       # # 2. Subir la imagen de la API a GCR
       #   run: |
-      #     docker build -t gcr.io/${{ vars.GCP_PROJECT_ID }}/mlops-api:latest -f Dockerfile.api .
-      #     docker push gcr.io/${{ vars.GCP_PROJECT_ID }}/mlops-api:latest
-      #   # --- CONSTRUIR Y SUBIR IMAGEN DE LA WEB (mlops-web) ---
+      #     docker build -t gcr.io/${{ vars.GCP_PROJECT_ID }}/api:latest -f Dockerfile.api .
+      #     docker push gcr.io/${{ vars.GCP_PROJECT_ID }}/api:latest
+      #   # --- CONSTRUIR Y SUBIR IMAGEN DE LA WEB (web) ---
       # - name: Build and Push Web Docker Image
       # # 1. Construir la imagen de la WEB usando Dockerfile.web
       # # 2. Subir la imagen de la WEB a GCR
       #   run: |
-      #     docker build -t gcr.io/${{ vars.GCP_PROJECT_ID }}/mlops-web:latest -f Dockerfile.web .
-      #     docker push gcr.io/${{ vars.GCP_PROJECT_ID }}/mlops-web:latest
+      #     docker build -t gcr.io/${{ vars.GCP_PROJECT_ID }}/web:latest -f Dockerfile.web .
+      #     docker push gcr.io/${{ vars.GCP_PROJECT_ID }}/web:latest
       - name: Build API Docker Image
         id: build_api
         run: |
-          IMAGE_NAME="gcr.io/${{ vars.GCP_PROJECT_ID }}/mlops-api:latest"
+          IMAGE_NAME="gcr.io/${{ vars.GCP_PROJECT_ID }}/api:latest"
           docker build -t $IMAGE_NAME -f Dockerfile.api .
           echo "IMAGE_API=$IMAGE_NAME" >> $GITHUB_ENV
 
@@ -117,7 +117,7 @@ jobs:
       - name: Build Web Docker Image
         id: build_web
         run: |
-          IMAGE_NAME="gcr.io/${{ vars.GCP_PROJECT_ID }}/mlops-web:latest"
+          IMAGE_NAME="gcr.io/${{ vars.GCP_PROJECT_ID }}/web:latest"
           docker build -t $IMAGE_NAME -f Dockerfile.web .
           echo "IMAGE_WEB=$IMAGE_NAME" >> $GITHUB_ENV
 
