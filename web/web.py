@@ -2,7 +2,8 @@ import streamlit as st
 import requests
 import os
 
-API_URL = os.environ.get("API_URL", "http://localhost:5000/predict")
+# API_URL = os.environ.get("API_URL", "http://localhost:5000/predict")
+API_URL = os.environ.get("API_URL")
 
 st.title("Credit Risk Prediction")
 st.write("Predict probability of loan default")
